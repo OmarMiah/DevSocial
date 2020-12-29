@@ -2,14 +2,16 @@
 
 const express = require('express'); // bringing in express
 
-const User = require('../../models/Users')
+const User = require('../../models/Users');
 const gravatar = require('gravatar');
-
+const config = require('config');
+const jwt = require('jsonwebtoken');
 //to use the express router
 const router = express.Router();
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 
 const {check, validationResult} = require('express-validator/check');
+const { JsonWebTokenError } = require('jsonwebtoken');
 // when we want to create a route we have to do
 
 // @route  POST api/users
@@ -56,7 +58,20 @@ async (req, res) => {
   
     await user.save();
   
-    res.send('User registered');
+    const payload = {
+      user: {
+        id: user.id
+      }
+    };
+
+    jwt.sign(
+      payload,
+      config.get('jwtSecret'),
+      {expiresIn: 360000},
+      (err,token) => {
+        if(err) throw err;
+        res.json({token});
+      });
   }catch(err) { 
     console.error(err.message);
     res.status(500).send('Server error');
