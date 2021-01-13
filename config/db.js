@@ -12,6 +12,7 @@ const connectDB = async () => {
     await mongoose.connect(db, {
       useNewUrlParser: true,
       useCreateIndex: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
     }); // we want to do this instead because we need that promise
 
