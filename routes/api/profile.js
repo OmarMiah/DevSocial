@@ -119,7 +119,7 @@ router.get('/', async (req,res) => {
         console.error(err.message);
         res.status(500).send('Server Error')
     }
-})
+});
 
 
 // @ROUTE GET api/profile/user/:user_id
@@ -140,7 +140,30 @@ router.get('/user/:user_id', async (req,res) => {
         }
         res.status(500).send('Server Error')
     }
-})
+});
+
+// @ROUTE DELTE api/profile
+// @DESC Delete profile, user, and posts
+// @ACCESS Private
+
+router.delete('/', auth, async (req,res) => {
+    try {
+        // @todo - remove user's posts
+        
+        // remove profile 
+        await Profile.findOneAndRemove({user: req.user.id});
+        await User.findOneAndRemove({user: req.user.id});
+
+        res.json({msg: 'User deleted'});
+    } catch (err) {
+        console.error(err.message);
+        if(err.kind == 'ObjectId'){
+            return res.status(400).json({msg: 'Profile not found'});
+        }
+        res.status(500).send('Server Error')
+    }
+});
+
 
 // then we want to export this module.
 module.exports = router;
