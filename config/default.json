@@ -1,6 +1,6 @@
 {
-  "mongoURI": "mongodb+srv://Omar_Miah:Test123@devsocial.8mqmh.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  "jwtSecret":"mysecrettoken",
+  "mongoURI": "mongodb+srv://Omar_Miah:omar1234@devsocial.hrnub.mongodb.net/?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken",
   "githubClientId": "5d824ec09c56f9bc2194",
-  "githubSecret":"b372e611d6c5ca616618fe7aed72debe9bd31967"
+  "githubSecret": "b372e611d6c5ca616618fe7aed72debe9bd31967"
 }

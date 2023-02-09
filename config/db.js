@@ -1,5 +1,5 @@
 //db.js
-const mongoose = require('mongoose'); // this is what we use to connect
+const mongoose = require('mongoose'); // this is what we use to connect to the database
 const config = require('config'); // we need to grab the string that we put inside default.json
 const db = config.get('mongoURI'); // we use this to get the value of the mongoURI
 
@@ -7,6 +7,7 @@ const db = config.get('mongoURI'); // we use this to get the value of the mongoU
 
 // we're going to use async await instead because it's the new standard and we can make it synchronous
 
+// mongoose let's us connect to our mongodb database 
 const connectDB = async () => {
   try {
     await mongoose.connect(db, {
